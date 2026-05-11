@@ -4,20 +4,48 @@
 > Stack: React + TypeScript + Vite + Tailwind CSS  
 > 목표: 발표 가능한 수준의 GitHub 협업 분석 프로토타입 완성
 
+> 작업 관리 기준: 이 파일을 TODO 관리 문서로 사용한다. 루트 `TODO.md`는 사용하지 않는다.
+
+---
+
+# Sprint 1 완료 기록
+
+- [x] React Router 의존성 추가
+- [x] React Router 설정
+- [x] 기본 라우트 구성 (`/`, `/result`, fallback)
+- [x] 확장 가능한 frontend 폴더 구조 생성
+- [x] 중앙 타입 정의 생성
+- [x] mock organization preset 데이터 생성
+- [x] mock analysis service 구현
+- [x] 재사용 UI 컴포넌트 구현 (`Button`, `Input`, `Card`, `Badge`, `PageContainer`, `SectionTitle`)
+- [x] Home page 입력 폼 구현
+- [x] Home page validation 구현
+- [x] Analyze 클릭 시 fake loading 표시
+- [x] Analyze 결과를 Result page로 전달
+- [x] Result page summary cards 구현
+- [x] Result page repository list 구현
+- [x] Result page team table 구현
+- [x] Demo Mode / Mock Data warning banner 구현
+- [x] Result page empty state 구현
+- [x] 웹사이트 노출 문구 한글화
+- [x] Sprint 1 관련 architecture/state/flow/component/directory 문서 업데이트
+- [x] `npm run build` 성공 확인
+- [x] `npm run lint` 성공 확인
+
 ---
 
 # 0. 프로젝트 초기 세팅
 
-- [ ] Vite + React + TypeScript 프로젝트 생성
-- [ ] Tailwind CSS 설정
+- [x] Vite + React + TypeScript 프로젝트 생성
+- [x] Tailwind CSS 설정
 - [ ] ESLint / Prettier 설정
 - [ ] 절대 경로 alias 설정 (`@/`)
-- [ ] 폴더 구조 설계
+- [x] 폴더 구조 설계
 - [ ] 환경 변수 구조 정의
-- [ ] 다크모드 기본 구조 추가
-- [ ] 공통 디자인 토큰 정의
-- [ ] mock 데이터 디렉토리 생성
-- [ ] sample organization preset 추가
+- [x] 다크 UI 기본 구조 추가
+- [x] 공통 디자인 토큰 정의
+- [x] mock 데이터 디렉토리 생성
+- [x] sample organization preset 추가
 
 ---
 
@@ -25,15 +53,15 @@
 
 ## 1.1 기본 디렉토리 구조
 
-- [ ] `components/`
-- [ ] `pages/`
+- [x] `components/`
+- [x] `pages/`
 - [ ] `layouts/`
-- [ ] `features/`
-- [ ] `services/`
-- [ ] `mock/`
-- [ ] `types/`
-- [ ] `utils/`
-- [ ] `constants/`
+- [x] `features/`
+- [x] `services/`
+- [x] `mock/`
+- [x] `types/`
+- [x] `utils/`
+- [x] `constants/`
 - [ ] `hooks/`
 
 ---
@@ -42,22 +70,22 @@
 
 ## 2.1 Core Types
 
-- [ ] OrganizationAnalysisResult 타입 정의
-- [ ] RepositorySummary 타입 정의
-- [ ] MemberActivity 타입 정의
-- [ ] RiskLevel enum 정의
+- [x] OrganizationAnalysisResult 타입 정의
+- [x] RepositorySummary 타입 정의
+- [x] MemberActivity 타입 정의
+- [x] RiskLevel 타입 정의
 - [ ] RiskReason 타입 정의
-- [ ] ScoreBreakdown 타입 정의
-- [ ] AnalysisStatus 타입 정의
+- [x] ScoreBreakdown 타입 정의
+- [x] AnalysisStatus 타입 정의
 
 ---
 
 ## 2.2 상태 타입 정의
 
-- [ ] Loading State 타입
-- [ ] Error State 타입
-- [ ] Warning State 타입
-- [ ] Empty State 타입
+- [x] Loading State 타입
+- [x] Error State 타입
+- [x] Warning State 타입
+- [x] Empty State 타입
 
 ---
 
@@ -65,22 +93,23 @@
 
 ## 3.1 Mock Dataset 설계
 
-- [ ] organization preset 데이터 생성
-- [ ] 정상 협업 팀 시나리오 생성
-- [ ] 협업 부족 팀 시나리오 생성
-- [ ] 특정 인원 몰빵 시나리오 생성
-- [ ] 활동 공백 시나리오 생성
-- [ ] 위험 사용자 포함 시나리오 생성
+- [x] organization preset 데이터 생성
+- [x] 정상 협업 팀 시나리오 생성
+- [x] 협업 부족 팀 시나리오 생성
+- [x] 특정 인원 몰빵 시나리오 생성
+- [x] 활동 공백 시나리오 생성
+- [x] 위험 사용자 포함 시나리오 생성
 
 ---
 
 ## 3.2 Mock Service
 
-- [ ] mock 분석 service 구현
-- [ ] organization 이름 기반 preset 매핑
-- [ ] loading delay 시뮬레이션
+- [x] mock 분석 service 구현
+- [x] organization 이름 기반 preset 매핑
+- [x] loading delay 시뮬레이션
 - [ ] random fallback 데이터 생성
-- [ ] mock warning 메시지 반환
+- [x] fallback mock 데이터 생성
+- [x] mock warning 메시지 반환
 
 ---
 
@@ -144,10 +173,10 @@
 
 # 6. 라우팅 구성
 
-- [ ] React Router 설치
-- [ ] Home 페이지 생성
-- [ ] Result 페이지 생성
-- [ ] Not Found 페이지 생성
+- [x] React Router 설치
+- [x] Home 페이지 생성
+- [x] Result 페이지 생성
+- [x] Not Found 페이지 생성
 
 ---
 
@@ -155,30 +184,30 @@
 
 ## 7.1 입력 폼
 
-- [ ] organization 입력 필드
-- [ ] GitHub URL 파싱 처리
-- [ ] 분석 기간 선택
-- [ ] repository 개수 선택
-- [ ] fork 제외 옵션
-- [ ] archived 제외 옵션
+- [x] organization 입력 필드
+- [x] GitHub URL 파싱 처리
+- [x] 분석 기간 선택
+- [x] repository 개수 선택
+- [x] fork 제외 옵션
+- [x] archived 제외 옵션
 
 ---
 
 ## 7.2 Validation
 
-- [ ] 빈 입력 validation
-- [ ] GitHub organization 형식 validation
-- [ ] URL validation
-- [ ] 에러 메시지 UI 구현
+- [x] 빈 입력 validation
+- [x] GitHub organization 형식 validation
+- [x] URL validation
+- [x] 에러 메시지 UI 구현
 
 ---
 
 ## 7.3 Analyze Flow
 
-- [ ] Analyze 버튼 구현
-- [ ] loading 상태 전환
-- [ ] 결과 페이지 이동
-- [ ] mock service 연결
+- [x] Analyze 버튼 구현
+- [x] loading 상태 전환
+- [x] 결과 페이지 이동
+- [x] mock service 연결
 
 ---
 
@@ -186,18 +215,18 @@
 
 ## 8.1 Summary Cards
 
-- [ ] 총 멤버 수 카드
+- [x] 총 멤버 수 카드
 - [ ] repository 수 카드
-- [ ] 총 commit 수 카드
-- [ ] 총 PR 수 카드
-- [ ] 위험 사용자 수 카드
+- [x] 총 commit 수 카드
+- [x] 총 PR 수 카드
+- [x] 위험 사용자 수 카드
 
 ---
 
 ## 8.2 Repository 목록
 
-- [ ] repository 리스트 UI
-- [ ] activity badge 표시
+- [x] repository 리스트 UI
+- [x] activity badge 표시
 - [ ] archived/fork badge 처리
 - [ ] scroll 처리
 
@@ -205,20 +234,20 @@
 
 ## 8.3 팀원 점수 테이블
 
-- [ ] member row UI
+- [x] member row UI
 - [ ] score badge UI
-- [ ] risk badge UI
+- [x] risk badge UI
 - [ ] sortable column 처리
-- [ ] hover interaction 추가
+- [x] hover interaction 추가
 
 ---
 
 ## 8.4 Risk Review 영역
 
-- [ ] Watch 이상 사용자 필터링
-- [ ] 위험 사유 표시
+- [x] Watch 이상 사용자 필터링
+- [x] 위험 사유 표시
 - [ ] 부족 요소 표시
-- [ ] risk card UI 구현
+- [x] risk card UI 구현
 
 ---
 
@@ -226,16 +255,16 @@
 
 ## 9.1 Loading
 
-- [ ] skeleton UI 구현
-- [ ] spinner 구현
+- [x] skeleton UI 구현
+- [x] spinner 구현
 - [ ] loading overlay 구현
 
 ---
 
 ## 9.2 Empty
 
-- [ ] empty state illustration
-- [ ] empty message UI
+- [x] empty state illustration
+- [x] empty message UI
 
 ---
 
@@ -243,14 +272,14 @@
 
 - [ ] error card UI
 - [ ] retry button 구현
-- [ ] fallback warning 표시
+- [x] fallback warning 표시
 
 ---
 
 ## 9.4 Warning
 
-- [ ] mock/fallback warning banner
-- [ ] demo mode badge 추가
+- [x] mock/fallback warning banner
+- [x] demo mode badge 추가
 
 ---
 
@@ -277,13 +306,13 @@
 
 ## 11.1 UI Components
 
-- [ ] Button
-- [ ] Input
+- [x] Button
+- [x] Input
 - [ ] Select
 - [ ] Checkbox
-- [ ] Card
+- [x] Card
 - [ ] Table
-- [ ] Badge
+- [x] Badge
 - [ ] Modal
 - [ ] Tooltip
 
@@ -291,10 +320,10 @@
 
 ## 11.2 상태 컴포넌트
 
-- [ ] LoadingView
+- [x] LoadingView
 - [ ] ErrorView
-- [ ] EmptyView
-- [ ] WarningBanner
+- [x] EmptyView
+- [x] WarningBanner
 
 ---
 
@@ -302,10 +331,10 @@
 
 ## 12.1 Theme
 
-- [ ] color palette 정의
-- [ ] risk level 색상 정의
-- [ ] typography 설정
-- [ ] spacing 규칙 정의
+- [x] color palette 정의
+- [x] risk level 색상 정의
+- [x] typography 설정
+- [x] spacing 규칙 정의
 
 ---
 
@@ -319,31 +348,31 @@
 
 # 13. 발표용 UX 개선
 
-- [ ] 큰 화면 기준 spacing 조정
-- [ ] 발표용 대비 강화
-- [ ] 핵심 위험 사용자 강조
-- [ ] summary section 시각 강화
-- [ ] 애니메이션 최소 추가
-- [ ] card hover 효과 추가
+- [x] 큰 화면 기준 spacing 조정
+- [x] 발표용 대비 강화
+- [x] 핵심 위험 사용자 강조
+- [x] summary section 시각 강화
+- [x] 애니메이션 최소 추가
+- [x] card hover 효과 추가
 
 ---
 
 # 14. 유지보수성 작업
 
-- [ ] utility 함수 분리
-- [ ] constants 중앙화
-- [ ] reusable component 정리
-- [ ] mock 데이터와 UI 분리
-- [ ] feature 단위 구조 정리
+- [x] utility 함수 분리
+- [x] constants 중앙화
+- [x] reusable component 정리
+- [x] mock 데이터와 UI 분리
+- [x] feature 단위 구조 정리
 
 ---
 
 # 15. 향후 API 연동 대비
 
-- [ ] API response interface 정의
-- [ ] service abstraction 적용
+- [x] API response interface 정의
+- [x] service abstraction 적용
 - [ ] fetch layer 분리
-- [ ] mock ↔ real API 교체 가능 구조 유지
+- [x] mock ↔ real API 교체 가능 구조 유지
 
 ---
 
@@ -351,12 +380,12 @@
 
 ## 16.1 기능 검증
 
-- [ ] organization 입력 가능
-- [ ] 결과 렌더링 가능
+- [x] organization 입력 가능
+- [x] 결과 렌더링 가능
 - [ ] 점수 계산 정상 동작
-- [ ] 위험 레벨 표시 정상 동작
-- [ ] warning 상태 정상 동작
-- [ ] error 상태 정상 동작
+- [x] 위험 레벨 표시 정상 동작
+- [x] warning 상태 정상 동작
+- [x] error 상태 정상 동작
 
 ---
 
@@ -364,28 +393,28 @@
 
 - [ ] desktop 해상도 확인
 - [ ] overflow 문제 확인
-- [ ] table 가독성 확인
+- [x] table 가독성 확인
 - [ ] chart 정상 렌더링 확인
 
 ---
 
 ## 16.3 Build 검증
 
-- [ ] TypeScript build 성공
-- [ ] Vite production build 성공
-- [ ] lint 통과
-- [ ] unused import 제거
+- [x] TypeScript build 성공
+- [x] Vite production build 성공
+- [x] lint 통과
+- [x] unused import 제거
 
 ---
 
 # 17. MVP 종료 조건
 
-- [ ] organization 입력 가능
-- [ ] mock 분석 가능
-- [ ] 결과 페이지 완성
-- [ ] 위험 사용자 탐지 가능
-- [ ] 발표 가능한 UI 완성
-- [ ] fallback/demo 흐름 안정화
-- [ ] React production build 성공
+- [x] organization 입력 가능
+- [x] mock 분석 가능
+- [x] 결과 페이지 완성
+- [x] 위험 사용자 표시 가능
+- [x] 발표 가능한 UI 완성
+- [x] fallback/demo 흐름 안정화
+- [x] React production build 성공
 
 ---

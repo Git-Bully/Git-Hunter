@@ -41,3 +41,14 @@
 | --- | --- | --- | --- |
 | 2026-05-11 | Sprint 1 결과 데이터는 React Router state로 전달 | 백엔드/저장소 없는 demo flow를 빠르게 검증 | 새로고침 시 결과가 없어질 수 있으며 Result empty state로 처리 |
 | 2026-05-11 | Mock service를 UI와 분리 | 향후 GitHub API service로 교체 가능한 경계 확보 | Component는 API/mock 세부사항을 알지 않음 |
+
+## Sprint 2 아키텍처 업데이트
+
+- Git-Hunter는 Sprint 2에서도 frontend-only React MVP로 유지한다.
+- backend, DB, OAuth, 실제 GitHub API 연동은 추가하지 않는다.
+- mock preset은 계산 완료 결과가 아니라 raw 활동 지표를 보유한다.
+- `services/analysisMockService.ts`는 mock source metric을 UI-facing `OrganizationAnalysisResult`로 변환하는 use-case 경계다.
+- 점수 계산은 `git-hunter/src/utils/score`에 분리한다.
+- 위험도 판정과 위험 사유 생성은 `git-hunter/src/utils/risk`에 분리한다.
+- 마지막 활동일, 활동 공백 상태 같은 날짜 보조 로직은 `git-hunter/src/utils/date`에 분리한다.
+- Result UI는 계산된 view model만 렌더링하며, page/component 내부에 점수 계산이나 risk 판정 로직을 두지 않는다.

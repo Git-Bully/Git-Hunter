@@ -31,3 +31,14 @@
 | `loading` | `success` | mock result 반환 | service result 존재 | `/result` route 이동 |
 | `loading` | `error` | mock service 실패 | Error instance 확인 | form error message 표시 |
 | `success` | `empty` | `/result` 새로고침 또는 직접 접근 | route state 없음 | EmptyState 표시 |
+
+## Sprint 2 상태 모델 업데이트
+
+- `ScoreBreakdown`은 Activity, Collaboration, Consistency, Total Health Score를 보유한다.
+- `RiskReason`은 위험 사유 code, label, description, severity를 보유한다.
+- `RiskAnalysisResult`는 Risk Level, 위험 사유 목록, 부족 요소, 마지막 활동 상태를 보유한다.
+- `MemberActivityInput`은 mock source metric으로 사용하며 UI-facing 결과와 분리한다.
+- `MemberActivity`는 service에서 계산된 score/risk 결과를 포함하는 UI-facing member model이다.
+- Home page는 form state, loading state, error state만 소유한다.
+- Result page는 route state로 받은 `OrganizationAnalysisResult`를 렌더링한다.
+- 계산 상태와 위험도 판정은 UI state가 아니라 service/use-case 결과로 취급한다.

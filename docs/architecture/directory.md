@@ -21,3 +21,14 @@
 | `git-hunter/src/constants` | directory | UI/service 공통 상수 | Shared constants | form option과 기본값 |
 | `docs/architecture` | directory | 프로젝트 명세 | Documentation | 구조, 흐름, 상태 문서 |
 | `.codex/ref_docs` | directory | 사용자 참고자료 | External reference | 프로젝트 명세 생성 위치로 사용하지 않음 |
+
+## Sprint 2 디렉토리 추가/변경
+
+| Path | Type | Responsibility | Owner | Notes |
+| --- | --- | --- | --- | --- |
+| `git-hunter/src/utils/score` | directory | 점수 계산 및 normalization | Analysis utility | Activity, Collaboration, Consistency, Total Score 계산 |
+| `git-hunter/src/utils/risk` | directory | 위험도 판정 및 위험 사유 생성 | Analysis utility | Stable, Watch, Risk, Critical 판정 |
+| `git-hunter/src/utils/date` | directory | 활동일 관련 날짜 보조 함수 | Shared utility | 마지막 활동 표시, inactivity 상태 계산 |
+| `git-hunter/src/features/analysis/components/RiskReview.tsx` | file | 위험 사용자 리뷰 UI | Analysis feature | Watch 이상 사용자만 카드로 표시 |
+| `git-hunter/src/components/common/ErrorView.tsx` | file | 카드 기반 error UI | Shared UI | 분석 실패 및 retry UI 표시 |
+| `git-hunter/src/constants/riskLabels.ts` | file | Risk Level 표시 라벨 | Shared constants | service와 UI의 역방향 의존 방지 |

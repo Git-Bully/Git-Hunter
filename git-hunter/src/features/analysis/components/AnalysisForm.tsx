@@ -57,7 +57,8 @@ export function AnalysisForm({
         <div>
           <h2 className="text-xl font-semibold text-zinc-50">조직 분석</h2>
           <p className="mt-2 text-sm leading-6 text-zinc-400">
-            스프린트 1 데모 흐름을 위해 GitHub 조직 이름 또는 URL을 입력하세요.
+            balanced-team, hero-team, low-collab-team, ghost-team, gap-team 같은
+            모의 조직 이름 또는 GitHub 조직 URL을 입력하세요.
           </p>
         </div>
 

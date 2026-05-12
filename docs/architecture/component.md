@@ -22,3 +22,14 @@
 - 복잡한 상태 전이는 hook 또는 store action으로 분리한다.
 - 공통 UI 컴포넌트와 기능 전용 컴포넌트를 분리한다.
 - API 타입과 UI view model의 변환 위치를 명확히 둔다.
+
+## Sprint 2 컴포넌트 계약
+
+- `features/analysis/components/TeamHealthTable.tsx`는 계산된 팀원 점수와 활동 지표를 표로 표시한다.
+- `TeamHealthTable.tsx`는 Activity, Collaboration, Consistency, Total Score를 직접 계산하지 않는다.
+- `features/analysis/components/RiskReview.tsx`는 Watch 이상 사용자만 카드로 표시한다.
+- `RiskReview.tsx`는 Risk Level, 위험 사유, 부족 요소, 마지막 활동 상태를 렌더링하지만 위험 사유를 직접 생성하지 않는다.
+- `features/analysis/components/SummaryCards.tsx`는 service result의 집계값만 표시한다.
+- `components/common/ErrorView.tsx`는 카드 기반 error 상태 UI를 제공한다.
+- `services/analysisMockService.ts`는 mock preset을 분석 결과로 변환하는 service/use-case 경계다.
+- `mock/mockOrganizations.ts`는 local mock scenario source data만 보유하며 UI에서 직접 import하지 않는다.

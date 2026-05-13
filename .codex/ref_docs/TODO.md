@@ -74,7 +74,7 @@
 - [x] RepositorySummary 타입 정의
 - [x] MemberActivity 타입 정의
 - [x] RiskLevel 타입 정의
-- [ ] RiskReason 타입 정의
+- [x] RiskReason 타입 정의
 - [x] ScoreBreakdown 타입 정의
 - [x] AnalysisStatus 타입 정의
 
@@ -117,36 +117,36 @@
 
 ## 4.1 Activity Score
 
-- [ ] commit 기반 점수 계산
-- [ ] PR 기반 점수 계산
-- [ ] 활동 repository 수 계산
-- [ ] 활동량 normalization 처리
+- [x] commit 기반 점수 계산
+- [x] PR 기반 점수 계산
+- [x] 활동 repository 수 계산
+- [x] 활동량 normalization 처리
 
 ---
 
 ## 4.2 Collaboration Score
 
-- [ ] review 활동 반영
-- [ ] issue 참여 반영
-- [ ] PR 상호작용 반영
-- [ ] repository 분산도 계산
+- [x] review 활동 반영
+- [x] issue 참여 반영
+- [x] PR 상호작용 반영
+- [x] repository 분산도 계산
 
 ---
 
 ## 4.3 Consistency Score
 
-- [ ] 활동 지속성 계산
-- [ ] 최근 활동 반영
-- [ ] 활동 공백 감점 처리
-- [ ] 주기적 활동 보정
+- [x] 활동 지속성 계산
+- [x] 최근 활동 반영
+- [x] 활동 공백 감점 처리
+- [x] 주기적 활동 보정
 
 ---
 
 ## 4.4 Total Score
 
-- [ ] 가중치 계산 구현
-- [ ] 0~100 범위 clamp 처리
-- [ ] score rounding 처리
+- [x] 가중치 계산 구현
+- [x] 0~100 범위 clamp 처리
+- [x] score rounding 처리
 
 ---
 
@@ -154,20 +154,20 @@
 
 ## 5.1 Risk Level 계산
 
-- [ ] Stable 조건 정의
-- [ ] Watch 조건 정의
-- [ ] Risk 조건 정의
-- [ ] Critical 조건 정의
+- [x] Stable 조건 정의
+- [x] Watch 조건 정의
+- [x] Risk 조건 정의
+- [x] Critical 조건 정의
 
 ---
 
 ## 5.2 Risk Reason 생성
 
-- [ ] 최근 활동 부족 탐지
-- [ ] 협업 부족 탐지
-- [ ] repository 편중 탐지
-- [ ] 활동 공백 탐지
-- [ ] 낮은 총 점수 탐지
+- [x] 최근 활동 부족 탐지
+- [x] 협업 부족 탐지
+- [x] repository 편중 탐지
+- [x] 활동 공백 탐지
+- [x] 낮은 총 점수 탐지
 
 ---
 
@@ -216,7 +216,7 @@
 ## 8.1 Summary Cards
 
 - [x] 총 멤버 수 카드
-- [ ] repository 수 카드
+- [x] repository 수 카드
 - [x] 총 commit 수 카드
 - [x] 총 PR 수 카드
 - [x] 위험 사용자 수 카드
@@ -227,15 +227,15 @@
 
 - [x] repository 리스트 UI
 - [x] activity badge 표시
-- [ ] archived/fork badge 처리
-- [ ] scroll 처리
+- [x] archived/fork badge 처리
+- [x] scroll 처리
 
 ---
 
 ## 8.3 팀원 점수 테이블
 
 - [x] member row UI
-- [ ] score badge UI
+- [x] score badge UI
 - [x] risk badge UI
 - [ ] sortable column 처리
 - [x] hover interaction 추가
@@ -246,7 +246,7 @@
 
 - [x] Watch 이상 사용자 필터링
 - [x] 위험 사유 표시
-- [ ] 부족 요소 표시
+- [x] 부족 요소 표시
 - [x] risk card UI 구현
 
 ---
@@ -270,8 +270,8 @@
 
 ## 9.3 Error
 
-- [ ] error card UI
-- [ ] retry button 구현
+- [x] error card UI
+- [x] retry button 구현
 - [x] fallback warning 표시
 
 ---
@@ -321,7 +321,7 @@
 ## 11.2 상태 컴포넌트
 
 - [x] LoadingView
-- [ ] ErrorView
+- [x] ErrorView
 - [x] EmptyView
 - [x] WarningBanner
 
@@ -382,7 +382,7 @@
 
 - [x] organization 입력 가능
 - [x] 결과 렌더링 가능
-- [ ] 점수 계산 정상 동작
+- [x] 점수 계산 정상 동작
 - [x] 위험 레벨 표시 정상 동작
 - [x] warning 상태 정상 동작
 - [x] error 상태 정상 동작
@@ -418,3 +418,135 @@
 - [x] React production build 성공
 
 ---
+
+# Sprint 2 완료 기록
+
+> Sprint 2 범위는 frontend-only MVP 기준으로 구현한다. 실제 GitHub API, backend, DB, OAuth, PDF export, chart library, advanced filtering/sorting, dark mode toggle, local persistence, Zustand/Redux, server state library는 구현하지 않는다.
+
+## 1. 점수 계산 시스템
+
+- [x] Activity Score 계산 로직 구현
+- [x] commit 수 기반 활동량 점수 반영
+- [x] PR 수 기반 활동량 점수 반영
+- [x] 활동 repository 수 기반 점수 반영
+- [x] 지나치게 큰 값 방지를 위한 soft-cap normalization 구현
+- [x] 특정 사용자 독주 완화를 위한 팀 기준 normalization 구현
+- [x] 0~100 clamp 처리 구현
+- [x] score rounding 규칙 통일
+- [x] Collaboration Score 계산 로직 구현
+- [x] review 활동 반영
+- [x] issue 참여 반영
+- [x] PR interaction 반영
+- [x] repository 분산도 반영
+- [x] review 없는 사용자 감점 처리
+- [x] repository 편중 사용자 감점 처리
+- [x] Consistency Score 계산 로직 구현
+- [x] 마지막 활동일 반영
+- [x] 장기간 inactivity 감점 처리
+- [x] 지속적 활동 사용자 가산 반영
+- [x] Total Health Score 가중치 계산 구현
+- [x] Activity 45%, Collaboration 30%, Consistency 25% 가중치 적용
+
+## 2. Risk 분석 시스템
+
+- [x] Stable risk level 판정 구현
+- [x] Watch risk level 판정 구현
+- [x] Risk risk level 판정 구현
+- [x] Critical risk level 판정 구현
+- [x] 총 점수 기반 risk 판정 반영
+- [x] 최근 활동 부족 기반 risk 판정 반영
+- [x] 협업 참여 부족 기반 risk 판정 반영
+- [x] repository 편중 기반 risk 판정 반영
+- [x] 활동 공백 기반 risk 판정 반영
+- [x] 사람이 읽을 수 있는 Risk Reason 생성 구현
+- [x] 최근 활동 부족 사유 생성
+- [x] PR 참여 없음 사유 생성
+- [x] review 활동 부족 사유 생성
+- [x] 특정 repository 편중 사유 생성
+- [x] 활동 공백 감지 사유 생성
+
+## 3. Mock 데이터 개선
+
+- [x] 정상 팀 preset 구현
+- [x] 특정 인원 몰빵 팀 preset 구현
+- [x] 협업 부족 팀 preset 구현
+- [x] 유령 팀원 포함 팀 preset 구현
+- [x] 활동 공백 팀 preset 구현
+- [x] mock 데이터를 계산 로직과 연결 가능한 raw activity metrics 구조로 개선
+- [x] 발표용으로 설명 가능한 현실적 수치 적용
+- [x] fallback mock 데이터 흐름 유지
+- [x] demo/mock warning 메시지 유지
+
+## 4. Result Page 강화
+
+- [x] Team Table에 Activity Score 컬럼 추가
+- [x] Team Table에 Collaboration Score 컬럼 추가
+- [x] Team Table에 Consistency Score 컬럼 추가
+- [x] Team Table에 PR 수 컬럼 추가
+- [x] Team Table에 Review 수 컬럼 추가
+- [x] Team Table에 Repository Count 컬럼 추가
+- [x] Risk Review 영역에서 Watch 이상 사용자만 표시
+- [x] Risk Review에 Risk Level 표시
+- [x] Risk Review에 주요 위험 사유 표시
+- [x] Risk Review에 부족 요소 표시
+- [x] Risk Review에 마지막 활동 상태 표시
+- [x] 위험도별 badge/card 색상 구분
+- [x] Summary 영역에 평균 팀 점수 표시
+- [x] Summary 영역에 Stable 비율 표시
+- [x] Summary 영역에 위험 사용자 비율 표시
+
+## 5. Utility 구조 정리
+
+- [x] score calculation 로직을 `src/utils/score`로 분리
+- [x] risk analysis 로직을 `src/utils/risk`로 분리
+- [x] normalization 로직을 `src/utils/score/normalization.ts`로 분리
+- [x] date utility 로직을 `src/utils/date`로 분리
+- [x] UI 컴포넌트에서 계산/판정 로직 제거
+- [x] service layer에서 mock data를 UI-facing result로 변환
+
+## 6. 타입 시스템 강화
+
+- [x] ScoreBreakdown 타입 유지 및 계산 결과와 연결
+- [x] RiskReason 타입 정의
+- [x] RiskAnalysisResult 타입 정의
+- [x] MemberActivityInput 타입 정의
+- [x] MemberActivity와 mock source metric 구조 분리
+- [x] `any` 사용 없이 Sprint 2 계산 함수 작성
+
+## 7. 상태 처리 및 UI 품질
+
+- [x] loading 상태 유지
+- [x] error 상태 카드 기반 UI 추가
+- [x] retry button 구현
+- [x] empty 상태 유지
+- [x] mock warning 상태 유지
+- [x] table 가독성 개선
+- [x] spacing 개선
+- [x] score 강조 표시 개선
+- [x] badge 스타일 유지 및 risk level 연결
+- [x] hover interaction 추가
+
+## 8. 문서화
+
+- [x] `docs/architecture/architecture.md` 갱신
+- [x] `docs/architecture/component.md` 갱신
+- [x] `docs/architecture/directory.md` 갱신
+- [x] `docs/architecture/flow.md` 갱신
+- [x] `docs/architecture/state.md` 갱신
+- [x] `.codex/ref_docs/TODO.md` 기존 원문 복구 후 Sprint 2 완료 기록 추가
+
+## 9. Sprint 2 검증
+
+- [x] `git diff --check` 통과
+- [x] `any` 사용 여부 점검
+- [x] 핵심 TypeScript 모듈 parse check 통과
+- [ ] `npm run build` 성공
+- [ ] TypeScript build 오류 점검 완료
+- [ ] 실제 브라우저 UI 렌더링 확인
+
+## 10. Sprint 2 잔여/보류 항목
+
+- [ ] `npm` 실행 가능 환경에서 `npm run build` 재검증
+- [ ] build 성공 후 TypeScript build 관련 Sprint 2 체크 상태 갱신
+- [ ] dev server 실행 가능 환경에서 desktop UI overflow 확인
+- [ ] dev server 실행 가능 환경에서 ResultPage 실제 렌더링 확인

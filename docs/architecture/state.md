@@ -42,3 +42,14 @@
 - Home page는 form state, loading state, error state만 소유한다.
 - Result page는 route state로 받은 `OrganizationAnalysisResult`를 렌더링한다.
 - 계산 상태와 위험도 판정은 UI state가 아니라 service/use-case 결과로 취급한다.
+
+## Sprint 3 상태 모델 업데이트
+
+- `TimelinePoint`는 mock 기반 활동 추세 chart의 입력 상태로 사용한다.
+- `TeamDistribution`은 팀원별 total/activity/collaboration/consistency score와 risk level을 chart 입력으로 보유한다.
+- `RiskDistribution`은 risk level별 count와 percentage를 chart 입력으로 보유한다.
+- `RepositoryInsight`는 repository analytics summary를 UI-facing insight model로 보유한다.
+- `ChartDataset`은 Result page에서 chart와 insight component에 전달하는 dashboard view model이다.
+- `ScoreAggregation`은 SummaryCards의 score breakdown 보조 표시를 위해 `utils/analytics`에서 생성한다.
+- Chart dataset은 persisted state가 아니며 `OrganizationAnalysisResult`에서 매 렌더링 시 파생된다.
+- Chart empty state는 chart panel presentation state로만 처리하고 domain status로 저장하지 않는다.

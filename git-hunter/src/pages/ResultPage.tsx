@@ -1,13 +1,17 @@
+import { useMemo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { EmptyState } from '../components/common/EmptyState'
 import { WarningBanner } from '../components/common/WarningBanner'
 import { PageContainer } from '../components/layout/PageContainer'
 import { Button } from '../components/ui/Button'
+import { DashboardCharts } from '../features/analysis/components/DashboardCharts'
 import { RepositoryList } from '../features/analysis/components/RepositoryList'
+import { RepositoryInsights } from '../features/analysis/components/RepositoryInsights'
 import { RiskReview } from '../features/analysis/components/RiskReview'
 import { SummaryCards } from '../features/analysis/components/SummaryCards'
 import { TeamHealthTable } from '../features/analysis/components/TeamHealthTable'
 import type { OrganizationAnalysisResult } from '../types/analysis'
+import { createDashboardChartDataset } from '../utils/chart/dashboardChartDataset'
 
 interface ResultLocationState {
   analysisResult?: OrganizationAnalysisResult
@@ -17,8 +21,12 @@ export function ResultPage() {
   const location = useLocation()
   const locationState = location.state as ResultLocationState | null
   const analysisResult = locationState?.analysisResult ?? null
+  const chartDataset = useMemo(
+    () => (analysisResult ? createDashboardChartDataset(analysisResult) : null),
+    [analysisResult],
+  )
 
-  if (!analysisResult) {
+  if (!analysisResult || !chartDataset) {
     return (
       <PageContainer>
         <EmptyState
@@ -36,15 +44,16 @@ export function ResultPage() {
 
   return (
     <PageContainer>
-      <header className="mb-8 flex flex-col gap-4 border-b border-zinc-800 pb-8 lg:flex-row lg:items-end lg:justify-between">
+      <header className="mb-8 flex flex-col gap-5 border-b border-zinc-800 pb-8 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <p className="text-sm font-medium text-emerald-300">
             {analysisResult.organization.displayName}
           </p>
-          <h1 className="mt-2 text-4xl font-bold text-zinc-50">협업 건강도 리포트</h1>
+          <h1 className="mt-2 text-4xl font-bold text-zinc-50">협업 분석 대시보드</h1>
           <p className="mt-3 text-sm text-zinc-400">
             {analysisResult.organization.analysisPeriodLabel} /{' '}
-            {analysisResult.organization.repositoryCountLabel}
+            {analysisResult.organization.repositoryCountLabel} / 생성{' '}
+            {new Date(analysisResult.generatedAt).toLocaleDateString('ko-KR')}
           </p>
         </div>
         <Link to="/">
@@ -54,8 +63,13 @@ export function ResultPage() {
 
       <div className="space-y-6">
         <WarningBanner message={analysisResult.warningMessage} />
-        <SummaryCards result={analysisResult} />
+        <SummaryCards
+          result={analysisResult}
+          scoreAggregation={chartDataset.scoreAggregation}
+        />
+        <DashboardCharts dataset={chartDataset} />
         <TeamHealthTable members={analysisResult.members} />
+        <RepositoryInsights insights={chartDataset.repositoryInsights} />
 
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <RepositoryList repositories={analysisResult.repositories} />

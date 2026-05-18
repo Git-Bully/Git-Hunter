@@ -391,10 +391,10 @@
 
 ## 16.2 UI 검증
 
-- [ ] desktop 해상도 확인
-- [ ] overflow 문제 확인
+- [x] desktop 해상도 확인
+- [x] overflow 문제 확인
 - [x] table 가독성 확인
-- [ ] chart 정상 렌더링 확인
+- [x] chart 정상 렌더링 확인
 
 ---
 
@@ -540,13 +540,81 @@
 - [x] `git diff --check` 통과
 - [x] `any` 사용 여부 점검
 - [x] 핵심 TypeScript 모듈 parse check 통과
-- [ ] `npm run build` 성공
-- [ ] TypeScript build 오류 점검 완료
-- [ ] 실제 브라우저 UI 렌더링 확인
+- [x] `npm run build` 성공
+- [x] TypeScript build 오류 점검 완료
+- [x] 실제 브라우저 UI 렌더링 확인
 
 ## 10. Sprint 2 잔여/보류 항목
 
-- [ ] `npm` 실행 가능 환경에서 `npm run build` 재검증
-- [ ] build 성공 후 TypeScript build 관련 Sprint 2 체크 상태 갱신
-- [ ] dev server 실행 가능 환경에서 desktop UI overflow 확인
-- [ ] dev server 실행 가능 환경에서 ResultPage 실제 렌더링 확인
+- [x] `npm` 실행 가능 환경에서 `npm run build` 재검증
+- [x] build 성공 후 TypeScript build 관련 Sprint 2 체크 상태 갱신
+- [x] dev server 실행 가능 환경에서 desktop UI overflow 확인
+- [x] dev server 실행 가능 환경에서 ResultPage 실제 렌더링 확인
+
+---
+
+# Sprint 3 작업 계획
+
+> Sprint 3 범위는 frontend-only MVP 기준으로 구현한다. 실제 GitHub API, backend, OAuth, DB, PDF export, local persistence, advanced filtering/search/sorting, realtime sync, Zustand/Redux, server state library는 구현하지 않는다.
+
+## 1. Chart 시스템
+
+- [x] Recharts 의존성 추가
+- [x] 공통 chart shell/component 구조 구현
+- [x] dark dashboard chart theme 적용
+- [x] responsive chart 처리
+
+## 2. Dashboard 차트
+
+- [x] Team Score Distribution chart 구현
+- [x] Risk Level Distribution chart 구현
+- [x] Repository Contribution chart 구현
+- [x] Activity Timeline chart 구현
+- [x] 차트 empty state 처리
+
+## 3. Analytics / Transform 계층
+
+- [x] chart transform utility 분리
+- [x] score aggregation utility 분리
+- [x] repository analytics utility 분리
+- [x] timeline generation utility 분리
+- [x] mock 데이터와 chart presentation logic 분리
+
+## 4. 타입 시스템
+
+- [x] `TimelinePoint` 타입 추가
+- [x] `RepositoryInsight` 타입 추가
+- [x] `TeamDistribution` 타입 추가
+- [x] `RiskDistribution` 타입 추가
+- [x] `ChartDataset` 타입 추가
+- [x] `any` 없이 Sprint 3 타입 작성
+
+## 5. Result Dashboard UI
+
+- [x] ResultPage dashboard layout 재구성
+- [x] Summary Cards 정보 밀도 강화
+- [x] Team Table risk row 강조 개선
+- [x] Repository Insights 영역 추가
+- [x] SaaS dashboard 기준 spacing, border, typography 개선
+
+## 6. 상태 UI
+
+- [x] chart/dashboard loading skeleton 개선
+- [x] chart 영역 empty UI 제공
+
+## 7. 문서화
+
+- [x] `docs/architecture/architecture.md` Sprint 3 업데이트
+- [x] `docs/architecture/component.md` Sprint 3 업데이트
+- [x] `docs/architecture/directory.md` Sprint 3 업데이트
+- [x] `docs/architecture/flow.md` Sprint 3 업데이트
+- [x] `docs/architecture/state.md` Sprint 3 업데이트
+
+## 8. Sprint 3 검증
+
+- [x] `npm run build` 성공
+- [x] TypeScript 오류 점검 완료
+- [x] unused import 제거
+- [x] chart rendering 확인
+- [x] dashboard overflow 문제 확인
+- [x] dark UI와 chart 색상 조화 확인

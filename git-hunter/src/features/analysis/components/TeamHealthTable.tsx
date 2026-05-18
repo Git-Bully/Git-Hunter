@@ -3,12 +3,18 @@ import { Badge } from '../../../components/ui/Badge'
 import { Card } from '../../../components/ui/Card'
 import { SectionTitle } from '../../../components/layout/SectionTitle'
 import { RISK_DISPLAY_LABEL } from '../../../constants/riskLabels'
+import { cx } from '../../../utils/classNames'
 
 interface TeamHealthTableProps {
   members: MemberActivity[]
 }
 
-const scoreColorClassName = 'font-semibold text-zinc-100'
+const riskRowClassNames: Record<RiskLevel, string> = {
+  stable: 'hover:bg-emerald-400/5',
+  watch: 'bg-yellow-400/[0.04] hover:bg-yellow-400/10',
+  risk: 'bg-red-400/[0.05] hover:bg-red-400/10',
+  critical: 'bg-fuchsia-400/[0.06] hover:bg-fuchsia-400/10',
+}
 
 export function TeamHealthTable({ members }: TeamHealthTableProps) {
   return (
@@ -36,18 +42,21 @@ export function TeamHealthTable({ members }: TeamHealthTableProps) {
           </thead>
           <tbody className="divide-y divide-zinc-800 bg-zinc-900/60">
             {members.map((member) => (
-              <tr className="transition-colors hover:bg-zinc-800/50" key={member.id}>
+              <tr
+                className={cx('transition-colors', riskRowClassNames[member.riskLevel])}
+                key={member.id}
+              >
                 <td className="px-4 py-4 font-medium text-zinc-100">{member.username}</td>
-                <td className="px-4 py-4 text-lg font-bold text-emerald-200">
+                <td className={`px-4 py-4 text-lg font-bold ${getScoreClassName(member.scores.total)}`}>
                   {member.scores.total}
                 </td>
-                <td className={`px-4 py-4 ${scoreColorClassName}`}>
+                <td className={`px-4 py-4 ${getScoreClassName(member.scores.activity)}`}>
                   {member.scores.activity}
                 </td>
-                <td className={`px-4 py-4 ${scoreColorClassName}`}>
+                <td className={`px-4 py-4 ${getScoreClassName(member.scores.collaboration)}`}>
                   {member.scores.collaboration}
                 </td>
-                <td className={`px-4 py-4 ${scoreColorClassName}`}>
+                <td className={`px-4 py-4 ${getScoreClassName(member.scores.consistency)}`}>
                   {member.scores.consistency}
                 </td>
                 <td className="px-4 py-4">
@@ -69,4 +78,16 @@ export function TeamHealthTable({ members }: TeamHealthTableProps) {
 
 function RiskBadge({ riskLevel }: { riskLevel: RiskLevel }) {
   return <Badge variant={riskLevel}>{RISK_DISPLAY_LABEL[riskLevel]}</Badge>
+}
+
+function getScoreClassName(score: number): string {
+  if (score >= 75) {
+    return 'text-emerald-200'
+  }
+
+  if (score >= 55) {
+    return 'text-yellow-200'
+  }
+
+  return 'text-red-200'
 }

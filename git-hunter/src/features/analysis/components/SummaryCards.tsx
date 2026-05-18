@@ -8,23 +8,51 @@ interface SummaryCardsProps {
 export function SummaryCards({ result }: SummaryCardsProps) {
   const summaryItems = [
     {
+      label: '팀 평균 점수',
+      value: result.totals.averageTeamScore,
+      suffix: '/100',
+      tone: 'default',
+    },
+    {
+      label: '안정 비율',
+      value: result.totals.stableRate,
+      suffix: '%',
+      tone: 'default',
+    },
+    {
+      label: '위험 사용자 비율',
+      value: result.totals.riskUserRate,
+      suffix: '%',
+      tone: result.totals.riskUserCount > 0 ? 'danger' : 'default',
+    },
+    {
+      label: '분석 리포지토리',
+      value: result.totals.repositoryCount,
+      suffix: '',
+      tone: 'default',
+    },
+    {
       label: '전체 팀원',
       value: result.totals.memberCount,
+      suffix: '',
       tone: 'default',
     },
     {
       label: '전체 커밋',
       value: result.totals.totalCommits,
+      suffix: '',
       tone: 'default',
     },
     {
       label: '전체 PR',
       value: result.totals.totalPullRequests,
+      suffix: '',
       tone: 'default',
     },
     {
-      label: '위험 사용자',
+      label: '관찰 이상',
       value: result.totals.riskUserCount,
+      suffix: '',
       tone: 'danger',
     },
   ] as const
@@ -44,6 +72,7 @@ export function SummaryCards({ result }: SummaryCardsProps) {
             }
           >
             {item.value}
+            <span className="ml-1 text-base font-semibold opacity-70">{item.suffix}</span>
           </p>
         </Card>
       ))}

@@ -61,3 +61,24 @@
 - Side effects: 외부 API 호출, DB 저장, localStorage 저장 없음.
 - Related API: 없음.
 - Related DB tables: 없음.
+
+## Sprint 3 Dashboard Flow
+
+- Actor: 발표/데모 사용자
+- Entry point: `/result` Result page
+- Preconditions: Home page에서 mock organization analysis가 완료되어 React Router state에 `OrganizationAnalysisResult`가 있어야 한다.
+- Steps:
+  1. Result page가 route state에서 `OrganizationAnalysisResult`를 읽는다.
+  2. `createDashboardChartDataset`이 service result를 chart 입력 dataset으로 변환한다.
+  3. `utils/analytics`가 team score distribution, risk distribution, repository contribution, repository insight, score aggregation을 생성한다.
+  4. `DashboardCharts`가 Team Score Distribution, Risk Level Distribution, Repository Contribution, Activity Timeline chart를 렌더링한다.
+  5. `SummaryCards`가 평균 점수, 안정 비율, 위험 비율, 활성 repository, 주간 활동 추세를 표시한다.
+  6. `TeamHealthTable`, `RepositoryInsights`, `RepositoryList`, `RiskReview`가 상세 분석 정보를 렌더링한다.
+- Validation: route state가 없으면 기존 empty state를 표시한다.
+- Empty state: chart dataset이 비어 있으면 chart panel 내부 empty state를 표시한다.
+- Error state: Sprint 3 Result page는 별도 external error를 만들지 않는다. 분석 실패는 Home page error state에서 처리한다.
+- Permission behavior: Sprint 3에서도 인증/권한 없음.
+- Retry or recovery: 사용자는 새 분석 버튼으로 Home page에 돌아가 다시 mock 분석을 실행한다.
+- Side effects: 외부 API 호출, DB 저장, localStorage 저장 없음.
+- Related API: 없음.
+- Related DB tables: 없음.

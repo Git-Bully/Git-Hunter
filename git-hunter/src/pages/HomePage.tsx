@@ -95,7 +95,7 @@ export function HomePage() {
           />
         ) : (
           <section className="space-y-6">
-            <WarningBanner message="스프린트 2는 여전히 로컬 모의 데이터만 사용합니다. 실제 GitHub API, OAuth, 백엔드, 저장소는 구현 범위가 아닙니다." />
+            <WarningBanner message="현재 MVP는 로컬 모의 데이터만 사용합니다. 실제 GitHub API, OAuth, 백엔드, 저장소는 구현 범위가 아닙니다." />
 
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               <Card>
@@ -109,29 +109,29 @@ export function HomePage() {
                 <p className="mt-1 text-xs text-zinc-500">안정부터 심각까지</p>
               </Card>
               <Card>
-                <p className="text-sm text-zinc-400">모의 데이터</p>
-                <p className="mt-2 text-3xl font-bold text-zinc-50">6</p>
-                <p className="mt-1 text-xs text-zinc-500">정상, 몰빵, 협업 부족, 유령, 공백</p>
+                <p className="text-sm text-zinc-400">차트 뷰</p>
+                <p className="mt-2 text-3xl font-bold text-zinc-50">4</p>
+                <p className="mt-1 text-xs text-zinc-500">점수, 위험도, 리포지토리, timeline</p>
               </Card>
               <Card tone="danger">
                 <p className="text-sm text-red-300">외부 API</p>
                 <p className="mt-2 text-3xl font-bold text-red-300">0</p>
-                <p className="mt-1 text-xs text-red-200/70">스프린트 2에서는 GitHub 호출 없음</p>
+                <p className="mt-1 text-xs text-red-200/70">MVP에서는 GitHub 호출 없음</p>
               </Card>
             </div>
 
             <Card>
               <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <h2 className="text-xl font-semibold text-zinc-50">스프린트 2 미리보기</h2>
+                  <h2 className="text-xl font-semibold text-zinc-50">대시보드 미리보기</h2>
                   <p className="mt-2 max-w-xl text-sm leading-6 text-zinc-400">
-                    결과 화면은 원본 활동 지표를 점수로 계산하고, 관찰/위험/심각 사용자가 왜 표시됐는지 설명합니다.
+                    결과 화면은 원본 활동 지표를 점수와 위험도, 리포지토리 인사이트, 발표용 차트로 변환합니다.
                   </p>
                 </div>
                 <div className="grid grid-cols-2 gap-3 text-sm text-zinc-300">
                   <span className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2">점수 분해</span>
-                  <span className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2">위험 사유</span>
-                  <span className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2">밀도 높은 표</span>
+                  <span className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2">위험도 분포</span>
+                  <span className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2">리포지토리 분석</span>
                   <span className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2">모의 데이터 경고</span>
                 </div>
               </div>

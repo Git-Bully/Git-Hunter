@@ -65,7 +65,8 @@ function createAnalysisResult(
     },
     repositories: preset.repositories,
     members,
-    totals: createTotals(members, preset.repositories.length),
+    activityTimeline: preset.activityTimeline,
+    totals: createTotals(members, preset.repositories, preset.activityTimeline),
     warningMessage: isFallback
       ? '데모 모드: 일치하는 프리셋이 없어 Git-Hunter가 대표 로컬 데이터를 사용했습니다.'
       : preset.warningMessage,
@@ -75,16 +76,28 @@ function createAnalysisResult(
 
 function createTotals(
   members: MemberActivity[],
-  repositoryCount: number,
+  repositories: MockOrganizationPreset['repositories'],
+  activityTimeline: MockOrganizationPreset['activityTimeline'],
 ): OrganizationAnalysisResult['totals'] {
   const memberCount = members.length
   const riskUserCount = members.filter((member) => member.riskLevel !== 'stable').length
   const stableUserCount = members.filter((member) => member.riskLevel === 'stable').length
   const totalScore = members.reduce((sum, member) => sum + member.scores.total, 0)
+  const latestTimelinePoint = activityTimeline.at(-1)
+  const previousTimelinePoint = activityTimeline.at(-2)
+  const weeklyActivityTrend = calculateTrendPercentage(
+    previousTimelinePoint?.totalActivity ?? 0,
+    latestTimelinePoint?.totalActivity ?? 0,
+  )
 
   return {
     memberCount,
-    repositoryCount,
+    repositoryCount: repositories.length,
+    activeRepositoryCount: repositories.filter(
+      (repository) =>
+        !repository.isArchived &&
+        repository.commitCount + repository.pullRequestCount > 0,
+    ).length,
     totalCommits: members.reduce((sum, member) => sum + member.commits, 0),
     totalPullRequests: members.reduce((sum, member) => sum + member.pullRequests, 0),
     riskUserCount,
@@ -92,7 +105,16 @@ function createTotals(
     averageTeamScore: memberCount > 0 ? Math.round(totalScore / memberCount) : 0,
     stableRate: memberCount > 0 ? Math.round((stableUserCount / memberCount) * 100) : 0,
     riskUserRate: memberCount > 0 ? Math.round((riskUserCount / memberCount) * 100) : 0,
+    weeklyActivityTrend,
   }
+}
+
+function calculateTrendPercentage(previousValue: number, currentValue: number): number {
+  if (previousValue <= 0) {
+    return currentValue > 0 ? 100 : 0
+  }
+
+  return Math.round(((currentValue - previousValue) / previousValue) * 100)
 }
 
 export async function runMockOrganizationAnalysis(

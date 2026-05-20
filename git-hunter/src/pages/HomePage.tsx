@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ErrorView } from '../components/common/ErrorView'
 import { LoadingView } from '../components/common/LoadingView'
@@ -10,8 +10,21 @@ import { Card } from '../components/ui/Card'
 import { DEFAULT_ANALYSIS_FORM_STATE } from '../constants/analysisOptions'
 import { AnalysisForm } from '../features/analysis/components/AnalysisForm'
 import { runMockOrganizationAnalysis } from '../services/analysisMockService'
-import type { AnalysisFormState } from '../types/analysis'
+import type { AnalysisFormState, LoadingState } from '../types/analysis'
 import { validateOrganizationInput } from '../utils/organizationInput'
+
+const ANALYSIS_LOADING_STEPS = [
+  '리포지토리 활동 신호 수집',
+  '협업 점수 계산',
+  '위험 사용자 후보 검토',
+  '대시보드 차트 구성',
+]
+
+const INITIAL_LOADING_STATE: LoadingState = {
+  stepIndex: 0,
+  label: ANALYSIS_LOADING_STEPS[0],
+  progress: 18,
+}
 
 export function HomePage() {
   const navigate = useNavigate()
@@ -20,12 +33,39 @@ export function HomePage() {
   )
   const [submitErrorMessage, setSubmitErrorMessage] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [loadingState, setLoadingState] =
+    useState<LoadingState>(INITIAL_LOADING_STATE)
 
   const validationErrorMessage = useMemo(
     () => validateOrganizationInput(formState.organizationInput),
     [formState.organizationInput],
   )
   const visibleErrorMessage = submitErrorMessage ?? validationErrorMessage
+
+  useEffect(() => {
+    if (!isSubmitting) {
+      return undefined
+    }
+
+    const intervalId = window.setInterval(() => {
+      setLoadingState((currentLoadingState) => {
+        const nextStepIndex = Math.min(
+          currentLoadingState.stepIndex + 1,
+          ANALYSIS_LOADING_STEPS.length - 1,
+        )
+
+        return {
+          stepIndex: nextStepIndex,
+          label: ANALYSIS_LOADING_STEPS[nextStepIndex],
+          progress: Math.min(currentLoadingState.progress + 24, 94),
+        }
+      })
+    }, 420)
+
+    return () => {
+      window.clearInterval(intervalId)
+    }
+  }, [isSubmitting])
 
   async function handleAnalyze() {
     const nextValidationErrorMessage = validateOrganizationInput(
@@ -38,6 +78,7 @@ export function HomePage() {
     }
 
     setSubmitErrorMessage(null)
+    setLoadingState(INITIAL_LOADING_STATE)
     setIsSubmitting(true)
 
     try {
@@ -87,10 +128,18 @@ export function HomePage() {
         />
 
         {isSubmitting ? (
-          <LoadingView />
+          <LoadingView
+            activeStepLabel={loadingState.label}
+            progressValue={loadingState.progress}
+            steps={ANALYSIS_LOADING_STEPS}
+          />
         ) : submitErrorMessage ? (
           <ErrorView
             action={<Button onClick={handleAnalyze}>다시 분석</Button>}
+            details={[
+              'Healthy Team, Burnout Team 같은 빠른 시나리오를 선택할 수 있습니다.',
+              '임의 조직명은 fallback mock dataset으로 분석됩니다.',
+            ]}
             message={submitErrorMessage}
           />
         ) : (

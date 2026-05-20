@@ -14,6 +14,22 @@ export type AnalysisStatus =
   | 'empty'
   | 'success'
 
+export type AnalysisScenarioId =
+  | 'healthy-team'
+  | 'burnout-team'
+  | 'ghost-member-team'
+  | 'one-man-army-team'
+  | 'collaboration-failure-team'
+
+export type TeamTableSortKey =
+  | 'username'
+  | 'totalScore'
+  | 'commits'
+  | 'pullRequests'
+  | 'lastActivityAt'
+
+export type TableSortDirection = 'asc' | 'desc'
+
 export type RiskReasonCode =
   | 'low-total-score'
   | 'recent-inactivity'
@@ -31,6 +47,25 @@ export interface AnalysisFormState {
   repositoryCount: RepositoryCountOption
   excludeForks: boolean
   excludeArchived: boolean
+}
+
+export interface AnalysisScenario {
+  id: AnalysisScenarioId
+  label: string
+  description: string
+  presetKey: string
+  aliases: string[]
+}
+
+export interface LoadingState {
+  stepIndex: number
+  label: string
+  progress: number
+}
+
+export interface TableSortState {
+  key: TeamTableSortKey
+  direction: TableSortDirection
 }
 
 export interface OrganizationSummary {

@@ -35,6 +35,11 @@ export function ResultPage() {
               <Button>분석 화면으로 돌아가기</Button>
             </Link>
           }
+          checklist={[
+            'route state 기반 MVP',
+            '새로고침 시 결과 초기화',
+            '홈에서 즉시 재분석 가능',
+          ]}
           message="현재 MVP에서는 결과 데이터가 라우터 상태에만 보관됩니다. 홈 화면에서 새 모의 분석을 실행하세요."
           title="분석 결과가 없습니다"
         />

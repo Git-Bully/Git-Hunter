@@ -17,7 +17,7 @@ export function Card({ children, className, tone = 'default', ...cardProps }: Ca
   return (
     <div
       className={cx(
-        'rounded-lg border p-5 shadow-2xl shadow-black/10',
+        'rounded-lg border p-5 shadow-2xl shadow-black/10 transition-colors',
         toneClassNames[tone],
         className,
       )}

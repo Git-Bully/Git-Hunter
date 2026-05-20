@@ -69,7 +69,11 @@ export function SummaryCards({ result, scoreAggregation }: SummaryCardsProps) {
   return (
     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
       {summaryItems.map((item) => (
-        <Card key={item.label} tone={item.tone}>
+        <Card
+          className="transition-colors hover:border-zinc-500"
+          key={item.label}
+          tone={item.tone}
+        >
           <p
             className={
               item.tone === 'danger' ? 'text-sm text-red-300' : 'text-sm text-zinc-400'

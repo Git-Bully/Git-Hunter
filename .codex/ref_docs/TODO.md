@@ -618,3 +618,7 @@
 - [x] chart rendering 확인
 - [x] dashboard overflow 문제 확인
 - [x] dark UI와 chart 색상 조화 확인
+- [x] `npm run lint` 성공
+- [x] `rg "\bany\b" git-hunter/src` 결과 없음
+- [x] headless Chrome 기반 `/` -> `/result` 분석 흐름에서 Recharts wrapper 4개 렌더링 확인
+- [x] headless Chrome 기반 chart empty state 없음, horizontal overflow 없음 확인

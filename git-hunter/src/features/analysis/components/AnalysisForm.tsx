@@ -3,6 +3,7 @@ import {
   ANALYSIS_PERIOD_OPTIONS,
   REPOSITORY_COUNT_OPTIONS,
 } from '../../../constants/analysisOptions'
+import { ANALYSIS_SCENARIOS } from '../../../constants/analysisScenarios'
 import type {
   AnalysisFormState,
   AnalysisPeriod,
@@ -57,9 +58,35 @@ export function AnalysisForm({
         <div>
           <h2 className="text-xl font-semibold text-zinc-50">조직 분석</h2>
           <p className="mt-2 text-sm leading-6 text-zinc-400">
-            balanced-team, hero-team, low-collab-team, ghost-team, gap-team 같은
-            모의 조직 이름 또는 GitHub 조직 URL을 입력하세요.
+            모의 시나리오 이름 또는 GitHub 조직 URL을 입력하세요. 실제 GitHub API는
+            호출하지 않습니다.
           </p>
+        </div>
+
+        <div>
+          <p className="text-sm font-medium text-zinc-300">빠른 시나리오</p>
+          <div className="mt-3 grid gap-2">
+            {ANALYSIS_SCENARIOS.map((scenario) => (
+              <button
+                className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-left transition-colors hover:border-emerald-400/50 hover:bg-emerald-400/10 disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={isSubmitting}
+                key={scenario.id}
+                onClick={() =>
+                  updateFormState({
+                    organizationInput: scenario.id,
+                  })
+                }
+                type="button"
+              >
+                <span className="block text-sm font-semibold text-zinc-100">
+                  {scenario.label}
+                </span>
+                <span className="mt-1 block text-xs leading-5 text-zinc-500">
+                  {scenario.description}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
 
         <Input

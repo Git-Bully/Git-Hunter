@@ -2,6 +2,7 @@ import {
   ANALYSIS_PERIOD_OPTIONS,
   REPOSITORY_COUNT_OPTIONS,
 } from '../constants/analysisOptions'
+import { resolveScenarioPresetKey } from '../constants/analysisScenarios'
 import { defaultMockOrganization, mockOrganizationPresets } from '../mock/mockOrganizations'
 import type {
   AnalysisFormState,
@@ -14,7 +15,7 @@ import { normalizeOrganizationInput } from '../utils/organizationInput'
 import { analyzeMemberRisk } from '../utils/risk/riskAnalyzer'
 import { calculateScoreBreakdown } from '../utils/score/scoreCalculator'
 
-const MOCK_ANALYSIS_DELAY_MS = 1200
+const MOCK_ANALYSIS_DELAY_MS = 1600
 const ANALYSIS_REFERENCE_DATE = new Date('2026-05-12T12:00:00.000+09:00')
 
 function delay(milliseconds: number): Promise<void> {
@@ -128,7 +129,10 @@ export async function runMockOrganizationAnalysis(
     throw new Error('조직 이름이 필요합니다.')
   }
 
-  const presetResult = mockOrganizationPresets[organizationLogin.toLowerCase()]
+  const normalizedOrganizationLogin = organizationLogin.toLowerCase()
+  const presetKey = resolveScenarioPresetKey(normalizedOrganizationLogin)
+    ?? normalizedOrganizationLogin
+  const presetResult = mockOrganizationPresets[presetKey]
   const isFallback = !presetResult
   const preset = presetResult ?? defaultMockOrganization
 

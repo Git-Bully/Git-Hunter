@@ -21,7 +21,7 @@ export function ChartPanel({
   title,
 }: ChartPanelProps) {
   return (
-    <Card className={cx('min-h-[380px]', className)}>
+    <Card className={cx('min-h-[380px] transition-colors hover:border-zinc-500', className)}>
       <SectionTitle description={description} title={title} />
       <div className="mt-6 h-[300px]">
         {isEmpty ? <ChartEmptyState message={emptyMessage} /> : children}

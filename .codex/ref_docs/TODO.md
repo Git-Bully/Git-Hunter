@@ -237,7 +237,7 @@
 - [x] member row UI
 - [x] score badge UI
 - [x] risk badge UI
-- [ ] sortable column 처리
+- [x] sortable column 처리
 - [x] hover interaction 추가
 
 ---
@@ -289,16 +289,16 @@
 
 - [ ] 팀 평균 점수 차트
 - [ ] activity distribution chart
-- [ ] risk level distribution chart
-- [ ] repository contribution chart
+- [x] risk level distribution chart
+- [x] repository contribution chart
 
 ---
 
 ## 10.2 시각화 라이브러리
 
-- [ ] Recharts 또는 Chart.js 선택
-- [ ] chart theme 적용
-- [ ] responsive chart 처리
+- [x] Recharts 또는 Chart.js 선택
+- [x] chart theme 적용
+- [x] responsive chart 처리
 
 ---
 
@@ -342,7 +342,7 @@
 
 - [ ] dark mode toggle
 - [ ] localStorage 저장
-- [ ] chart dark theme 대응
+- [x] chart dark theme 대응
 
 ---
 
@@ -618,3 +618,64 @@
 - [x] chart rendering 확인
 - [x] dashboard overflow 문제 확인
 - [x] dark UI와 chart 색상 조화 확인
+- [x] `npm run lint` 성공
+- [x] `rg "\bany\b" git-hunter/src` 결과 없음
+- [x] headless Chrome 기반 `/` -> `/result` 분석 흐름에서 Recharts wrapper 4개 렌더링 확인
+- [x] headless Chrome 기반 chart empty state 없음, horizontal overflow 없음 확인
+
+---
+
+# Sprint 4 작업 계획
+
+> Sprint 4 범위는 frontend-only MVP 기준으로 구현한다. 실제 GitHub API, backend, OAuth, DB, PDF export, local persistence, Zustand/Redux, server state library는 구현하지 않는다.
+
+## 1. 상태 UX 강화
+
+- [x] loading progress 단계와 dashboard skeleton 개선
+- [x] error UI 안내와 retry context 개선
+- [x] result empty state placeholder 개선
+- [x] mock warning banner 정보 구조 개선
+
+## 2. Dashboard Interaction
+
+- [x] Summary/Repository/Risk card hover polish 적용
+- [x] Team Table lightweight sort 구현
+- [x] Team Table sticky header 및 risk row emphasis 개선
+- [x] Repository list empty/hover state 개선
+
+## 3. Risk Review 고도화
+
+- [x] 위험 사용자별 핵심 score/활동 지표 표시
+- [x] risk reason severity별 시각 강조 개선
+- [x] risk user 없음 상태 placeholder 개선
+
+## 4. Mock Scenario 시스템
+
+- [x] Sprint 4 scenario alias 타입과 목록 추가
+- [x] Healthy/Burnout/Ghost/One-Man Army/Collaboration Failure 입력 alias 지원
+- [x] fallback mock warning 유지
+
+## 5. 타입 및 유틸 정리
+
+- [x] `AnalysisScenario` 타입 추가
+- [x] `TableSortState` 타입 추가
+- [x] table sorting utility 분리
+- [x] `any` 없이 Sprint 4 타입 유지
+
+## 6. 문서화
+
+- [x] `docs/architecture/architecture.md` Sprint 4 업데이트
+- [x] `docs/architecture/component.md` Sprint 4 업데이트
+- [x] `docs/architecture/directory.md` Sprint 4 업데이트
+- [x] `docs/architecture/flow.md` Sprint 4 업데이트
+- [x] `docs/architecture/state.md` Sprint 4 업데이트
+
+## 7. Sprint 4 검증
+
+- [x] `npm run build` 성공
+- [x] `npm run lint` 성공
+- [x] loading 상태 직접 검증
+- [x] error 상태 직접 검증
+- [x] empty 상태 직접 검증
+- [x] chart overflow 확인
+- [x] `rg "\bany\b" git-hunter/src` 결과 없음

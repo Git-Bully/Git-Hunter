@@ -52,3 +52,26 @@
 - 위험도 판정과 위험 사유 생성은 `git-hunter/src/utils/risk`에 분리한다.
 - 마지막 활동일, 활동 공백 상태 같은 날짜 보조 로직은 `git-hunter/src/utils/date`에 분리한다.
 - Result UI는 계산된 view model만 렌더링하며, page/component 내부에 점수 계산이나 risk 판정 로직을 두지 않는다.
+
+## Sprint 3 아키텍처 업데이트
+
+- Git-Hunter는 Sprint 3에서도 frontend-only React MVP로 유지하며 실제 GitHub API, backend, OAuth, DB를 추가하지 않는다.
+- Recharts를 chart rendering library로 사용한다.
+- `services/analysisMockService.ts`는 mock preset의 raw 활동 지표와 timeline 데이터를 `OrganizationAnalysisResult`로 변환한다.
+- `git-hunter/src/utils/analytics`는 score aggregation, team distribution, risk distribution, repository insight, timeline fallback 생성을 담당한다.
+- `git-hunter/src/utils/chart`는 `OrganizationAnalysisResult`를 dashboard chart dataset으로 변환하는 경계다.
+- `features/analysis/components/charts`는 Recharts 기반 presentation component만 보유하고 score/risk/repository 분석 로직을 직접 계산하지 않는다.
+- Result dashboard 흐름은 `ResultPage -> createDashboardChartDataset -> DashboardCharts/RepositoryInsights`로 구성한다.
+- Chart 색상은 `constants/chartTheme.ts`에서 Risk Level 및 repository activity level과 일관되게 관리한다.
+
+## Sprint 4 아키텍처 업데이트
+
+- Git-Hunter는 Sprint 4에서도 frontend-only React MVP로 유지하며 실제 GitHub API, backend, OAuth, DB를 추가하지 않는다.
+- Sprint 4의 핵심 변경은 UX polish, 상태 처리 강화, interaction 개선, mock scenario alias 강화다.
+- `constants/analysisScenarios.ts`는 발표용 scenario label, alias, preset mapping만 보유한다.
+- `services/analysisMockService.ts`는 organization 입력값을 scenario alias로 해석한 뒤 기존 mock preset을 선택한다.
+- `features/analysis/components/AnalysisForm.tsx`는 scenario quick select UI만 제공하며 mock source data를 직접 import하지 않는다.
+- `components/common/LoadingView.tsx`는 loading progress, 단계 표시, dashboard skeleton을 presentation state로 렌더링한다.
+- `utils/table/memberTableSorting.ts`는 Team Table 정렬 로직을 담당하며 UI component 내부에 sorting 비교 로직을 두지 않는다.
+- `TeamHealthTable.tsx`는 `TableSortState`만 소유하고 score/risk 계산은 수행하지 않는다.
+- Result empty/error/warning 상태는 공통 상태 컴포넌트에서 presentation으로 처리한다.

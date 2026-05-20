@@ -26,6 +26,12 @@ export const mockOrganizationPresets: Record<string, MockOrganizationPreset> = {
       createMember('member-jun', 'docs-jun', 18, 2, 1, 5, 3, 1, 82, 10, 13, '2026-05-03'),
       createMember('member-ghost', 'ghost-member', 5, 0, 0, 0, 0, 1, 91, 3, 24, '2026-04-21'),
     ],
+    activityTimeline: createTimeline([
+      ['4주 전', 46, 7, 8],
+      ['3주 전', 62, 10, 11],
+      ['2주 전', 88, 17, 10],
+      ['이번 주', 124, 27, 9],
+    ]),
     warningMessage: REFERENCE_WARNING,
   },
   'balanced-team': {
@@ -46,6 +52,12 @@ export const mockOrganizationPresets: Record<string, MockOrganizationPreset> = {
       createMember('balanced-3', 'cora-dev', 39, 7, 8, 6, 12, 3, 51, 17, 5, '2026-05-10'),
       createMember('balanced-4', 'danny-dev', 36, 6, 7, 7, 10, 2, 55, 16, 6, '2026-05-09'),
     ],
+    activityTimeline: createTimeline([
+      ['4주 전', 38, 8, 7],
+      ['3주 전', 44, 9, 8],
+      ['2주 전', 42, 7, 9],
+      ['이번 주', 36, 6, 10],
+    ]),
     warningMessage: REFERENCE_WARNING,
   },
   'hero-team': {
@@ -66,6 +78,12 @@ export const mockOrganizationPresets: Record<string, MockOrganizationPreset> = {
       createMember('hero-3', 'quiet-api', 19, 3, 4, 2, 5, 2, 66, 11, 11, '2026-05-05'),
       createMember('hero-4', 'quiet-docs', 8, 1, 0, 1, 1, 1, 88, 4, 18, '2026-04-29'),
     ],
+    activityTimeline: createTimeline([
+      ['4주 전', 22, 4, 2],
+      ['3주 전', 58, 9, 3],
+      ['2주 전', 97, 16, 4],
+      ['이번 주', 126, 17, 3],
+    ]),
     warningMessage: REFERENCE_WARNING,
   },
   'low-collab-team': {
@@ -86,6 +104,12 @@ export const mockOrganizationPresets: Record<string, MockOrganizationPreset> = {
       createMember('collab-3', 'commit-heavy-c', 45, 1, 0, 1, 1, 1, 84, 12, 10, '2026-05-06'),
       createMember('collab-4', 'review-light', 19, 1, 1, 2, 2, 1, 81, 8, 13, '2026-05-03'),
     ],
+    activityTimeline: createTimeline([
+      ['4주 전', 34, 2, 0],
+      ['3주 전', 56, 2, 1],
+      ['2주 전', 70, 3, 0],
+      ['이번 주', 53, 0, 0],
+    ]),
     warningMessage: REFERENCE_WARNING,
   },
   'ghost-team': {
@@ -105,6 +129,12 @@ export const mockOrganizationPresets: Record<string, MockOrganizationPreset> = {
       createMember('ghost-low-1', 'almost-absent', 6, 0, 0, 0, 0, 1, 92, 3, 23, '2026-04-22'),
       createMember('ghost-low-2', 'missing-student', 1, 0, 0, 0, 0, 1, 100, 1, 31, '2026-04-10'),
     ],
+    activityTimeline: createTimeline([
+      ['4주 전', 47, 8, 9],
+      ['3주 전', 38, 7, 8],
+      ['2주 전', 26, 5, 3],
+      ['이번 주', 21, 2, 1],
+    ]),
     warningMessage: REFERENCE_WARNING,
   },
   'gap-team': {
@@ -125,6 +155,12 @@ export const mockOrganizationPresets: Record<string, MockOrganizationPreset> = {
       createMember('gap-3', 'burst-api', 31, 5, 4, 2, 6, 2, 71, 8, 24, '2026-04-25'),
       createMember('gap-4', 'recent-helper', 18, 3, 5, 5, 8, 2, 57, 12, 8, '2026-05-11'),
     ],
+    activityTimeline: createTimeline([
+      ['4주 전', 64, 12, 8],
+      ['3주 전', 78, 11, 9],
+      ['2주 전', 36, 6, 5],
+      ['이번 주', 14, 3, 3],
+    ]),
     warningMessage: REFERENCE_WARNING,
   },
 }
@@ -179,4 +215,16 @@ function createMember(
     longestInactivityDays,
     lastActivityAt,
   }
+}
+
+function createTimeline(
+  points: [label: string, commitCount: number, pullRequestCount: number, reviewCount: number][],
+): MockOrganizationPreset['activityTimeline'] {
+  return points.map(([label, commitCount, pullRequestCount, reviewCount]) => ({
+    label,
+    commitCount,
+    pullRequestCount,
+    reviewCount,
+    totalActivity: commitCount + pullRequestCount + reviewCount,
+  }))
 }

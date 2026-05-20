@@ -33,3 +33,28 @@
 - `components/common/ErrorView.tsx`는 카드 기반 error 상태 UI를 제공한다.
 - `services/analysisMockService.ts`는 mock preset을 분석 결과로 변환하는 service/use-case 경계다.
 - `mock/mockOrganizations.ts`는 local mock scenario source data만 보유하며 UI에서 직접 import하지 않는다.
+
+## Sprint 3 컴포넌트 계약
+
+- `features/analysis/components/DashboardCharts.tsx`는 `ChartDataset`을 받아 chart section만 조립한다.
+- `features/analysis/components/charts/ChartPanel.tsx`는 chart card shell과 chart empty state를 제공한다.
+- `TeamScoreDistributionChart.tsx`는 `TeamDistribution`만 렌더링하며 점수 계산을 수행하지 않는다.
+- `RiskLevelDistributionChart.tsx`는 `RiskDistribution`만 렌더링하며 위험도 판정을 수행하지 않는다.
+- `RepositoryContributionChart.tsx`는 `RepositoryContribution`만 렌더링하며 repository insight를 계산하지 않는다.
+- `ActivityTimelineChart.tsx`는 `TimelinePoint`만 렌더링하며 timeline fallback 생성을 수행하지 않는다.
+- `RepositoryInsights.tsx`는 `RepositoryInsight` 결과만 표시한다.
+- `SummaryCards.tsx`는 service totals와 `ScoreAggregation`을 표시하며 aggregation 계산은 `utils/analytics`에 둔다.
+- Recharts component는 animation을 비활성화해 발표 화면과 headless capture에서 즉시 완성된 chart를 표시한다.
+
+## Sprint 4 컴포넌트 계약
+
+- `AnalysisForm.tsx`는 `ANALYSIS_SCENARIOS` quick select를 표시하지만 mock preset 데이터를 직접 소유하지 않는다.
+- `LoadingView.tsx`는 loading step, progress, dashboard skeleton을 props 기반 presentation으로 렌더링한다.
+- `ErrorView.tsx`는 error message, recovery copy, retry action을 카드 기반으로 표시한다.
+- `EmptyState.tsx`는 result state absence와 같은 empty 상태를 placeholder dashboard 형태로 표시한다.
+- `WarningBanner.tsx`는 Demo Mode, Mock Data 기반 분석, GitHub API 미연동 상태를 방해가 적은 banner로 표시한다.
+- `TeamHealthTable.tsx`는 lightweight sort button과 sticky header를 소유한다.
+- `TeamHealthTable.tsx`는 `sortMembersForTable` 결과를 렌더링하며 table sorting 비교 로직을 직접 구현하지 않는다.
+- `RiskReview.tsx`는 risk member의 score, collaboration, inactivity, repository concentration 지표를 표시한다.
+- `RepositoryList.tsx`는 repository empty state, hover state, contribution scale만 표시한다.
+- UI interaction은 hover, border emphasis, sticky header 수준으로 제한하며 과도한 animation은 사용하지 않는다.

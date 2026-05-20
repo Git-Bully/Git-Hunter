@@ -2,6 +2,7 @@ import {
   ANALYSIS_PERIOD_OPTIONS,
   REPOSITORY_COUNT_OPTIONS,
 } from '../constants/analysisOptions'
+import { resolveScenarioPresetKey } from '../constants/analysisScenarios'
 import { defaultMockOrganization, mockOrganizationPresets } from '../mock/mockOrganizations'
 import type {
   AnalysisFormState,
@@ -14,7 +15,7 @@ import { normalizeOrganizationInput } from '../utils/organizationInput'
 import { analyzeMemberRisk } from '../utils/risk/riskAnalyzer'
 import { calculateScoreBreakdown } from '../utils/score/scoreCalculator'
 
-const MOCK_ANALYSIS_DELAY_MS = 1200
+const MOCK_ANALYSIS_DELAY_MS = 1600
 const ANALYSIS_REFERENCE_DATE = new Date('2026-05-12T12:00:00.000+09:00')
 
 function delay(milliseconds: number): Promise<void> {
@@ -65,7 +66,8 @@ function createAnalysisResult(
     },
     repositories: preset.repositories,
     members,
-    totals: createTotals(members, preset.repositories.length),
+    activityTimeline: preset.activityTimeline,
+    totals: createTotals(members, preset.repositories, preset.activityTimeline),
     warningMessage: isFallback
       ? '데모 모드: 일치하는 프리셋이 없어 Git-Hunter가 대표 로컬 데이터를 사용했습니다.'
       : preset.warningMessage,
@@ -75,16 +77,28 @@ function createAnalysisResult(
 
 function createTotals(
   members: MemberActivity[],
-  repositoryCount: number,
+  repositories: MockOrganizationPreset['repositories'],
+  activityTimeline: MockOrganizationPreset['activityTimeline'],
 ): OrganizationAnalysisResult['totals'] {
   const memberCount = members.length
   const riskUserCount = members.filter((member) => member.riskLevel !== 'stable').length
   const stableUserCount = members.filter((member) => member.riskLevel === 'stable').length
   const totalScore = members.reduce((sum, member) => sum + member.scores.total, 0)
+  const latestTimelinePoint = activityTimeline.at(-1)
+  const previousTimelinePoint = activityTimeline.at(-2)
+  const weeklyActivityTrend = calculateTrendPercentage(
+    previousTimelinePoint?.totalActivity ?? 0,
+    latestTimelinePoint?.totalActivity ?? 0,
+  )
 
   return {
     memberCount,
-    repositoryCount,
+    repositoryCount: repositories.length,
+    activeRepositoryCount: repositories.filter(
+      (repository) =>
+        !repository.isArchived &&
+        repository.commitCount + repository.pullRequestCount > 0,
+    ).length,
     totalCommits: members.reduce((sum, member) => sum + member.commits, 0),
     totalPullRequests: members.reduce((sum, member) => sum + member.pullRequests, 0),
     riskUserCount,
@@ -92,7 +106,16 @@ function createTotals(
     averageTeamScore: memberCount > 0 ? Math.round(totalScore / memberCount) : 0,
     stableRate: memberCount > 0 ? Math.round((stableUserCount / memberCount) * 100) : 0,
     riskUserRate: memberCount > 0 ? Math.round((riskUserCount / memberCount) * 100) : 0,
+    weeklyActivityTrend,
   }
+}
+
+function calculateTrendPercentage(previousValue: number, currentValue: number): number {
+  if (previousValue <= 0) {
+    return currentValue > 0 ? 100 : 0
+  }
+
+  return Math.round(((currentValue - previousValue) / previousValue) * 100)
 }
 
 export async function runMockOrganizationAnalysis(
@@ -106,7 +129,10 @@ export async function runMockOrganizationAnalysis(
     throw new Error('조직 이름이 필요합니다.')
   }
 
-  const presetResult = mockOrganizationPresets[organizationLogin.toLowerCase()]
+  const normalizedOrganizationLogin = organizationLogin.toLowerCase()
+  const presetKey = resolveScenarioPresetKey(normalizedOrganizationLogin)
+    ?? normalizedOrganizationLogin
+  const presetResult = mockOrganizationPresets[presetKey]
   const isFallback = !presetResult
   const preset = presetResult ?? defaultMockOrganization
 

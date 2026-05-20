@@ -32,3 +32,26 @@
 | `git-hunter/src/features/analysis/components/RiskReview.tsx` | file | 위험 사용자 리뷰 UI | Analysis feature | Watch 이상 사용자만 카드로 표시 |
 | `git-hunter/src/components/common/ErrorView.tsx` | file | 카드 기반 error UI | Shared UI | 분석 실패 및 retry UI 표시 |
 | `git-hunter/src/constants/riskLabels.ts` | file | Risk Level 표시 라벨 | Shared constants | service와 UI의 역방향 의존 방지 |
+
+## Sprint 3 디렉토리 추가/변경
+
+| Path | Type | Responsibility | Owner | Notes |
+| --- | --- | --- | --- | --- |
+| `git-hunter/src/constants/chartTheme.ts` | file | chart 색상과 surface token | Shared constants | Risk Level 및 repository activity 색상 일관성 유지 |
+| `git-hunter/src/utils/analytics` | directory | dashboard analytics transform | Analysis utility | score aggregation, distribution, repository insight, timeline fallback |
+| `git-hunter/src/utils/chart` | directory | chart dataset assembly | Analysis utility | service result를 chart component 입력으로 변환 |
+| `git-hunter/src/features/analysis/components/DashboardCharts.tsx` | file | dashboard chart section 조립 | Analysis feature | 개별 chart component에 dataset 전달 |
+| `git-hunter/src/features/analysis/components/RepositoryInsights.tsx` | file | repository insight summary UI | Analysis feature | 가장 활발한 repository, 저활동 repository, 편중, 분산도 표시 |
+| `git-hunter/src/features/analysis/components/charts` | directory | Recharts presentation components | Analysis feature | Team score, risk distribution, repository contribution, activity timeline |
+| `git-hunter/src/components/common/LoadingView.tsx` | file | dashboard loading skeleton | Shared UI | chart skeleton 형태 포함 |
+
+## Sprint 4 디렉토리 추가/변경
+
+| Path | Type | Responsibility | Owner | Notes |
+| --- | --- | --- | --- | --- |
+| `git-hunter/src/constants/analysisScenarios.ts` | file | 발표용 mock scenario label, alias, preset mapping | Shared constants | UI는 scenario metadata만 사용하고 mock source data는 import하지 않음 |
+| `git-hunter/src/utils/table` | directory | table interaction utility | Shared utility | Team Table 정렬 비교 로직 분리 |
+| `git-hunter/src/utils/table/memberTableSorting.ts` | file | `MemberActivity` table sort transform | Shared utility | `TableSortState` 기반 정렬 |
+| `git-hunter/src/components/common/WarningBanner.tsx` | file | demo/mock warning banner | Shared UI | Demo Mode, Mock Data, GitHub API 미연동 표시 강화 |
+| `git-hunter/src/components/common/EmptyState.tsx` | file | empty state placeholder | Shared UI | result empty 상태 dashboard placeholder 표시 |
+| `git-hunter/src/components/common/ErrorView.tsx` | file | error state card | Shared UI | recovery copy와 retry action 표시 |

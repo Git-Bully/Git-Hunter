@@ -19,7 +19,7 @@ export function Badge({ children, className, variant }: BadgeProps) {
   return (
     <span
       className={cx(
-        'inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold',
+        'inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold transition-colors',
         variantClassNames[variant],
         className,
       )}
@@ -28,4 +28,3 @@ export function Badge({ children, className, variant }: BadgeProps) {
     </span>
   )
 }
-
